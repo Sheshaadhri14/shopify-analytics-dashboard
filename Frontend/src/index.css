@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Base Styles --- */
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color: #f3f4f6; /* Tailwind gray-100 */
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #3b82f6; /* Tailwind blue-500 */
+}
+
+/* --- Containers & Cards --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 0.5rem; /* Tailwind rounded-lg */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* subtle shadow */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Responsive Typography --- */
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+p {
+  margin-bottom: 0.5rem;
+  color: #374151; /* Tailwind gray-700 */
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary {
+  background-color: #3b82f6; /* blue-500 */
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background-color: #2563eb; /* blue-600 */
+}
+.btn-secondary {
+  background-color: #6b7280; /* gray-500 */
+  color: #ffffff;
+}
+.btn-secondary:hover {
+  background-color: #4b5563; /* gray-600 */
+}
+
+/* --- Toast Overrides (React Hot Toast) --- */
+#react-hot-toast {
+  top: 1rem;
+  right: 1rem;
+  left: auto;
+  bottom: auto;
+  z-index: 9999;
+}
+#react-hot-toast > div {
+  background-color: #1f2937; /* Tailwind gray-800 */
+  color: #f9fafb; /* Tailwind gray-50 */
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  min-width: 200px;
+  max-width: 320px;
+}
+#react-hot-toast > div > .react-hot-toast__icon {
+  margin-right: 0.75rem;
+  font-size: 1.5rem;
+}
+#react-hot-toast > div > .react-hot-toast__message {
+  flex: 1 1 100%;
+  font-size: 0.875rem; /* text-sm for small screens */
+}
+#react-hot-toast > div > .react-hot-toast__close-button {
+  margin-left: 0.75rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #9ca3af;
+}
+#react-hot-toast > div:hover > .react-hot-toast__close-button {
+  color: #f9fafb;
+}
+
+/* Toast variants */
+#react-hot-toast > div[data-type="success"] { background-color: #10b981; }
+#react-hot-toast > div[data-type="error"] { background-color: #ef4444; }
+#react-hot-toast > div[data-type="info"] { background-color: #3b82f6; }
+#react-hot-toast > div[data-type="warning"] { background-color: #f59e0b; }
+
+/* --- Responsive Utilities --- */
+@media (max-width: 640px) {
+  .container {
+    padding: 0.5rem;
+  }
+  .card {
+    padding: 0.75rem;
+  }
+  h1 { font-size: 1.25rem; }
+  h2 { font-size: 1.125rem; }
+  h3 { font-size: 1rem; }
+  .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
