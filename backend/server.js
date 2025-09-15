@@ -1,24 +1,25 @@
 // server.js
-require("dotenv").config();
 const express = require("express");
 const routes = require("./src/routes");
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 
 const app = express();
+
+// --- Hardcoded frontend URL and Shopify secret ---
+const FRONTEND_URL = "http://localhost:5173"; // Change this to your frontend URL if deployed
+const SHOPIFY_API_SECRET = "your-shopify-api-secret"; // Replace with your actual secret
 
 // --- CORS ---
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: FRONTEND_URL,
     credentials: true,
   })
 );
 
 // --- Raw body parser for Shopify webhooks ---
-// Handles content-type like 'application/json' or 'application/json; charset=utf-8'
 app.use("/api/webhooks", (req, res, next) => {
   let data = [];
   req.on("data", (chunk) => data.push(chunk));
@@ -38,12 +39,12 @@ app.use(routes);
 app.get("/", (req, res) => res.send("✅ API is running..."));
 
 // --- HTTP + Socket.IO setup ---
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "*",
+    origin: FRONTEND_URL,
     credentials: true,
   },
 });
@@ -75,5 +76,7 @@ function emitWebhook(tenantId, topic, payload) {
 app.set("emitWebhook", emitWebhook);
 
 // --- Start server ---
-server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-console.log("Shopify secret loaded:", process.env.SHOPIFY_API_SECRET);
+server.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log("Shopify secret loaded:", SHOPIFY_API_SECRET);
+});
